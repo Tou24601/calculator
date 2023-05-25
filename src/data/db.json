@@ -1,0 +1,101 @@
+{
+  "services":
+    {
+      "2023": [
+        {
+          "id": 0,
+          "name": "Internet",
+          "price": 39
+        },
+        {
+          "id": 1,
+          "name": "Telewizja",
+          "price": 49
+        },
+        {
+          "id": 2,
+          "name": "Abonament telefoniczny",
+          "price": 29
+        },
+        {
+          "id": 3,
+          "name": "Dekoder 4K",
+          "price": 29
+        },
+        {
+          "id": 4,
+          "name": "Internet + telewizja",
+          "price": 79
+        },
+        {
+          "id": 5,
+          "name": "Internet + Abonament telefoniczny",
+          "price": 64
+        }
+      ],
+      "2024": [
+        {
+          "id": 6,
+          "name": "Internet",
+          "price": 49
+        },
+        {
+          "id": 7,
+          "name": "Telewizja",
+          "price": 49
+        },
+        {
+          "id": 8,
+          "name": "Abonament telefoniczny",
+          "price": 29
+        },
+        {
+          "id": 9,
+          "name": "Dekoder 4K",
+          "price": 29
+        },
+        {
+          "id": 10,
+          "name": "Internet + telewizja",
+          "price": 89
+        },
+        {
+          "id": 11,
+          "name": "Internet + Abonament telefoniczny",
+          "price": 64
+        }
+      ],
+      "2025": [
+        {
+          "id": 12,
+          "name": "Internet",
+          "price": 59
+        },
+        {
+          "id": 13,
+          "name": "Telewizja",
+          "price": 59
+        },
+        {
+          "id": 14,
+          "name": "Abonament telefoniczny",
+          "price": 29
+        },
+        {
+          "id": 15,
+          "name": "Dekoder 4K",
+          "price": 29
+        },
+        {
+          "id": 16,
+          "name": "Internet + telewizja",
+          "price": 99
+        },
+        {
+          "id": 17,
+          "name": "Internet + Abonament telefoniczny",
+          "price": 64
+        }
+      ]
+    }
+}
