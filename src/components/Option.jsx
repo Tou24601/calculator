@@ -1,6 +1,6 @@
-const Option = ({optionValue, optionTxt}) => {
+const Option = ({optionValue, isSelected, optionTxt}) => {
     return (
-        <option value={optionValue}>{optionTxt}</option>
+        <option value={optionValue} selected={isSelected}>{optionTxt}</option>
     )
 }
 

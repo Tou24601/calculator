@@ -1,13 +1,30 @@
+import { useState } from "react";
 import Option from "../components/Option";
 
-const Select = ({ options, selectID, selectLabel }) => {
-  console.log(options);
+const Select = ({ options, selectedOption, selectID, selectLabel, sendChosenValue }) => {
+  const [chosenValue, setChosenValue] = useState("");
+
+  const handleChange = (value) => {
+    setChosenValue(value);
+    sendChosenValue(value)
+  }
+
+  let counter = 0;
+
   return (
-      <select className="form-select" id={selectID} name="">
+    <div className="col-5">
+      <select className="form-select" id={selectID} name="" onChange={(e) => handleChange(e.target.value)}>
+        <Option
+          optionValue={selectedOption}
+          optionTxt={selectedOption}
+        />
         {options.map((item) => {
-          return <Option optionValue={item} optionTxt={item} />;
+          counter++;
+          return <Option optionValue={item} optionTxt={item} key={counter}
+          />;
         })}
       </select>
+    </div>
   );
 };
 export default Select;

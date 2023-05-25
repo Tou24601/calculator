@@ -1,9 +1,12 @@
 import { useState, useEffect } from 'react';
 import Select from './Select';
+import Text from './Text';
 
 const Table = () => {
-    const [services, setServices] = useState([])
+    const [offer, setOffer] = useState([])
     const [years, setYears] = useState([])
+    const [services, setServices] = useState([])
+    const [prices, setprices] = useState([])
 
     useEffect(() => {
         fetch("http://localhost:5000/services")
@@ -11,18 +14,39 @@ const Table = () => {
             return response.json()
         })
         .then((data) => {
-            setServices(data)
+            setOffer(data)
         }) 
     }, [])
 
     useEffect(() => {
-        console.log(services)
-        setYears(Object.keys(services));
-        console.log(years)
-    }, [services])
+        setYears(Object.keys(offer));
+    }, [offer])
+
+    const handleChosenYear = (value) => {
+        let offerArr = Object.entries(offer);
+        for (let i = 0; i < offerArr.length; i++) {
+            if (offerArr[i][0] === value) {
+                const servicesNames = offerArr[i][1].map((item) => {
+                    return item.name
+                })
+                setServices(servicesNames)
+
+                const servicesPrices = offerArr[i][1].map((item) => {
+                    return item.price
+                })
+
+                setprices(servicesPrices)
+            } 
+        }
+
+    }
+
+    const handleChosenService = (value) => {
+        console.log(value)
+    }
 
   return (
-    <table className="table">
+    <div className='container'><table className="table">
       <thead>
         <tr>
           <th scope="col">Rok</th>
@@ -32,9 +56,9 @@ const Table = () => {
       </thead>
       <tbody>
         <tr>
-          <th scope="row"><Select options={years} /></th>
-          <td>Mark</td>
-          <td>Otto</td>
+          <td scope="row"><Select options={years} selectedOption="Wybierz rok" sendChosenValue={handleChosenYear} /></td>
+          <td><Select options={services} selectedOption="Wybierz usługę" sendChosenValue={handleChosenService} /></td>
+          <td><Text textValue="heloł zł" /></td>
         </tr>
         <tr>
           <th scope="row">2</th>
@@ -48,6 +72,7 @@ const Table = () => {
         </tr>
       </tbody>
     </table>
+    </div>
   );
 };
 
