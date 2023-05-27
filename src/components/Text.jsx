@@ -1,6 +1,6 @@
 const Text = ({textValue}) => {
     return (
-        <p>{textValue}</p>
+        <p className="fs-5">{textValue}</p>
     )
 }
 export default Text;

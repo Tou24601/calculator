@@ -1,7 +1,11 @@
 import { useState, useEffect } from "react";
 import Row from "./Row";
 
-const Table = () => {
+const Table = ({sendChosenYear, rows}) => {
+
+    const handleChosenYear = (rok) => {
+        //i tu kontekst z rokiem
+    }
   return (
     <div className="container">
       <table className="table table-striped">
@@ -13,7 +17,10 @@ const Table = () => {
           </tr>
         </thead>
         <tbody>
-            <Row />
+            <Row sendChosenYear={sendChosenYear} yearSelectClass="form-select" />
+            {rows.map((item) => {
+               return <Row key={item} yearSelectClass="form-select nonvisible" /> 
+            })}
         </tbody>
       </table>
     </div>
