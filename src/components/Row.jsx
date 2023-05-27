@@ -5,8 +5,9 @@ import Text from "./Text";
 const Row = () => {
     const [offer, setOffer] = useState([]);
     const [years, setYears] = useState([]);
+    const [chosenArray, setChosenArray] = useState([]);
     const [services, setServices] = useState([]);
-    const [prices, setprices] = useState([]);
+    const [priceValue, setPriceValue] = useState(0);
   
     useEffect(() => {
       fetch("http://localhost:5000/services")
@@ -27,27 +28,19 @@ const Row = () => {
     const handleChosenYear = (value) => {
       for (let i = 0; i < offerArr.length; i++) {
         if (offerArr[i][0] === value) {
-          const servicesNames = offerArr[i][1].map((item) => {
+            setChosenArray(offerArr[i][1]);
+          const servicesNames = chosenArray.map((item) => {
             return item.name;
           });
           setServices(servicesNames);
-  
-          /*const servicesPrices = offerArr[i][1].map((item) => {
-            return item.price;
-          });
-  
-          setprices(servicesPrices);*/
         }
       }
     };
   
     const handleChosenService = (value) => {
-      console.log(value);
-      //do naprawy
-      console.log(offerArr[1][1].name);
-      for (let i = 0; i < offerArr.length; i++) {
-          if (offerArr[i][1].name === value) {
-            console.log(offerArr[i][1].price);
+      for (let i = 0; i < chosenArray.length; i++) {
+          if (chosenArray[i].name === value) {
+            setPriceValue(chosenArray[i].price)
           }
     }};
 
@@ -68,7 +61,7 @@ const Row = () => {
           />
         </td>
         <td>
-          <Text textValue="heloł zł" />
+          <Text textValue={`${priceValue} zł`} />
         </td>
       </tr>
 

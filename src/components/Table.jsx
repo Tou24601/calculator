@@ -4,7 +4,7 @@ import Row from "./Row";
 const Table = () => {
   return (
     <div className="container">
-      <table className="table">
+      <table className="table table-striped">
         <thead>
           <tr>
             <th scope="col">Rok</th>
