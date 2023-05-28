@@ -3,9 +3,6 @@ import Row from "./Row";
 
 const Table = ({sendChosenYear, rows}) => {
 
-    const handleChosenYear = (rok) => {
-        //i tu kontekst z rokiem
-    }
   return (
     <div className="container">
       <table className="table table-striped">
