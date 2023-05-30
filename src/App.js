@@ -3,6 +3,7 @@ import logo from './logo.svg';
 import Header from './components/Header';
 import Main from './components/Main';
 import Table from './components/Table';
+import YearSelect from './components/YearSelect';
 import './App.css';
 
 function App() {
@@ -10,6 +11,7 @@ function App() {
     <div className="App">
       <Header />
       <Main />
+
     </div>
   );
 }

@@ -1,16 +1,18 @@
 import { useState, useEffect, createContext } from "react";
 import Select from "./Select";
+import YearSelect from './YearSelect';
+import ServiceSelect from './ServiceSelect';
 import Text from "./Text";
 
-const ChosenData = createContext([]);
+const ChosenAaaData = createContext();
 
-const Row = ({ sendChosenYear, yearSelectClass }) => {
+const Row = ({ sendChosenYear, yearSelectClass, handleChosenArray, options, chosenData }) => {
 
 
   const [offer, setOffer] = useState([]);
   const [years, setYears] = useState([]);
-  const [chosenArray, setChosenArray] = useState([]);
-  const [services, setServices] = useState([]);
+  //const [chosenArray, setChosenArray] = useState([]);
+  //const [services, setServices] = useState([]);
   const [priceValue, setPriceValue] = useState(0);
 
   useEffect(() => {
@@ -32,12 +34,11 @@ const Row = ({ sendChosenYear, yearSelectClass }) => {
   const handleChosenYear = (value) => {
     for (let i = 0; i < offerArr.length; i++) {
       if (offerArr[i][0] === value) {
-        console.log(chosenArray)
-        setChosenArray(offerArr[i][1]);
-        const servicesNames = chosenArray.map((item) => {
+        handleChosenArray(offerArr[i][1]);
+        /*const servicesNames = chosenArray.map((item) => {
           return item.name;
-        });
-        setServices(servicesNames);
+        });*/
+        //setServices(servicesNames);
         sendChosenYear(value);
       }
     }
@@ -46,16 +47,16 @@ const Row = ({ sendChosenYear, yearSelectClass }) => {
   
 
   const handleChosenService = (value) => {
-    for (let i = 0; i < chosenArray.length; i++) {
-      if (chosenArray[i].name === value) {
-        setPriceValue(chosenArray[i].price);
+    for (let i = 0; i < chosenData.length; i++) {
+      if (chosenData[i].name === value) {
+        setPriceValue(chosenData[i].price);
       }
     }
   };
 
   return (
     <>
-      <ChosenData.Provider value={chosenArray}>
+      <ChosenAaaData.Provider value={"aa"}>
         <tr>
           <td scope="row">
             <Select
@@ -68,7 +69,7 @@ const Row = ({ sendChosenYear, yearSelectClass }) => {
           <td>
             <Select
               selectClass={"form-select"}
-              options={services}
+              options={options}
               selectedOption="Wybierz usługę"
               sendChosenValue={handleChosenService}
             />
@@ -77,10 +78,10 @@ const Row = ({ sendChosenYear, yearSelectClass }) => {
             <Text textValue={`${priceValue} zł`} />
           </td>
         </tr>
-      </ChosenData.Provider>
+      </ChosenAaaData.Provider>
     </>
   );
 };
 
 export default Row;
-export {  ChosenData };
+export {  ChosenAaaData };
