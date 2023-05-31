@@ -10,11 +10,10 @@ const Select = ({
   sendChosenValue,
   selectClass
 }) => {
-  const [chosenValue, setChosenValue] = useState("");
 
   const handleChange = (value) => {
-    setChosenValue(value);
     sendChosenValue(value);
+    console.log(value)
   };
 
   let counter = 0;
