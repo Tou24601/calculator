@@ -13,7 +13,6 @@ const Select = ({
 
   const handleChange = (value) => {
     sendChosenValue(value);
-    console.log(value)
   };
 
   let counter = 0;
