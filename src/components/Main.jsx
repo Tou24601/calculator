@@ -1,30 +1,19 @@
 import { useState, useEffect } from "react";
 import Table from "./Table";
 import Button from "./Button";
+import Text from "./Text";
 
 const Main = () => {
 
-    const [rows, setRows] = useState([])
-    const [counter, setCounter] = useState(0);
-
-
-    const handleYearChange = (value) => {
-        let chosenYear = value;
-        return chosenYear;
-    }
-
-    const handleAddClick = () => {
-        let newRows = [...rows, counter];
-        setRows(newRows);
-        let newCounter = counter + 1
-        setCounter(newCounter)
-    }
+  const handleYearChange = (value) => {
+    let chosenYear = value;
+    return chosenYear;
+  };
 
   return (
-    <>
-      <Table sendChosenYear={handleYearChange} rows={rows} />
-      <Button buttonValue="+ Dodaj usługę" handleClick={handleAddClick} />
-    </>
+    <div className="container">
+      <Table sendChosenYear={handleYearChange} />
+    </div>
   );
 };
 

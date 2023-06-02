@@ -70,14 +70,14 @@ const Row = ({ years, sendChosenValue , yearSelectClass, handleChosenArray, hand
           </td>
           <td>
             <Select
-              selectClass={"form-select"}
+              selectClass={"form-select col-12"}
               options={options}
               selectedOption="Wybierz usługę"
               sendChosenValue={handleChosenService}
             />
           </td>
           <td>
-            <Text textValue={`${priceValue} zł`} sendObject={sendObject} />
+            <Text textValue={`${priceValue} zł`} textClass="fs-5 text-end col-4" sendObject={sendObject} />
           </td>
         </tr>
       </ChosenAaaData.Provider>

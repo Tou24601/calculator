@@ -1,6 +1,7 @@
-const Text = ({textValue}) => {
+const Text = ({textValue, textClass}) => {
     return (
-        <p className="fs-5">{textValue}</p>
-    )
+        <div className="">
+        <p className={textClass}>{textValue}</p>
+        </div>)
 }
 export default Text;

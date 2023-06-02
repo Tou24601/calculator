@@ -1,15 +1,21 @@
 import { useState, useEffect } from "react";
 import Row from "./Row";
+import Button from "./Button";
+import Text from "./Text";
 
-const Table = ({sendChosenYear, rows}) => {
-
+const Table = ({ sendChosenYear }) => {
   const [offer, setOffer] = useState([]);
   const [offerArr, setOfferArr] = useState([]);
   const [years, setYears] = useState([]);
   const [chosenData, setChosenData] = useState([]);
   const [services, setServices] = useState([]);
+  const [chosenList, setChosenList] = useState([]);
   const [serviesNamesList, setServicesNamesList] = useState([]);
+  const [sum, setSum] = useState(0);
   const [objectsList, setObjectsList] = useState([]);
+
+  const [rows, setRows] = useState([]);
+  const [counter, setCounter] = useState(1);
   //const [priceValue, setPriceValue] = useState(0);
 
   useEffect(() => {
@@ -24,7 +30,7 @@ const Table = ({sendChosenYear, rows}) => {
 
   useEffect(() => {
     setYears(Object.keys(offer));
-    setOfferArr(Object.entries(offer))
+    setOfferArr(Object.entries(offer));
   }, [offer]);
 
   //do poprawki
@@ -41,9 +47,7 @@ const Table = ({sendChosenYear, rows}) => {
     }
   };
 
-  
-
-/*  const handleChosenService = (value) => {
+  /*  const handleChosenService = (value) => {
     for (let i = 0; i < chosenData.length; i++) {
       if (chosenData[i].name === value) {
         setPriceValue(chosenData[i].price)
@@ -53,37 +57,55 @@ const Table = ({sendChosenYear, rows}) => {
   };*/
 
   const handleChosenArray = (value) => {
-    setChosenData(value)
-  }
+    setChosenData(value);
+  };
 
   useEffect(() => {
     const servicesNames = chosenData.map((item) => {
       return item.name;
     });
-    setServices(servicesNames)
-  }, [chosenData])
+    setServices(servicesNames);
+  }, [chosenData]);
 
   //dlaczego nie stworzyć tego elementu w row, żeby przy edycji się zmieniał?
-const getObject = (value) => {
-  for (let x = 0; x < objectsList.length; x++) {
+  const getObject = (value) => {
+    /*for (let x = 0; x < objectsList.length; x++) {
     if (value.id === objectsList[x].id) {
       console.log(objectsList[x])
     }
-  }
+  }*/
+    setObjectsList([...objectsList, value]);
 
-  //let newPricesList = [...pricesList, priceValue];
-  //setPricesList(newPricesList)
+    let prices = objectsList.map((item) => {
+      return item.price;
+    });
+    let priceSum = prices.reduce((acc, num) => {
+      return acc + num;
+    }, 0);
+    let servicesList = objectsList.map((item) => {
+      return item.name;
+    });
+    setSum(priceSum);
+    console.log(servicesList);
 
-}
-  
-   /*const getPrice = (value) => {
+    //let newPricesList = [...pricesList, priceValue];
+    //setPricesList(newPricesList)
+  };
+
+  /*const getPrice = (value) => {
     setPriceValue(value)
    // console.log(value)
    }*/
 
+  const handleAddClick = () => {
+    let newRows = [...rows, counter];
+    setRows(newRows);
+    let newCounter = counter + 1;
+    setCounter(newCounter);
+  };
   return (
-    <div className="container">
-      <table className="table table-striped">
+    <div>
+      <table className="table table-borderless">
         <thead>
           <tr>
             <th scope="col">Rok</th>
@@ -92,10 +114,46 @@ const getObject = (value) => {
           </tr>
         </thead>
         <tbody>
-            <Row sendChosenYear={sendChosenYear} yearSelectClass="form-select" handleChosenArray={handleChosenArray} options={services} chosenData={chosenData} years={years} handleChosenYear={handleChosenYear} sendObject={getObject} />
-            {rows.map((item) => {
-               return <Row key={item} yearSelectClass="form-select nonvisible" handleChosenArray={handleChosenArray} options={services} chosenData={chosenData}  years={years} handleChosenYear={handleChosenYear} sendObject={getObject} /> 
-            })}
+          <Row
+            key={0}
+            sendChosenYear={sendChosenYear}
+            yearSelectClass="form-select"
+            handleChosenArray={handleChosenArray}
+            options={services}
+            chosenData={chosenData}
+            years={years}
+            handleChosenYear={handleChosenYear}
+            sendObject={getObject}
+          />
+          {rows.map((item) => {
+            return (
+              <Row
+                key={item}
+                yearSelectClass="form-select col-10 nonvisible"
+                handleChosenArray={handleChosenArray}
+                options={services}
+                chosenData={chosenData}
+                years={years}
+                handleChosenYear={handleChosenYear}
+                sendObject={getObject}
+              />
+            );
+          })}
+          <tr>
+            <td></td>
+            <td>
+              {" "}
+              <Button
+                buttonValue="+ Dodaj usługę"
+                handleClick={handleAddClick}
+                buttonClass="btn btn-primary col-1.5 position-absolute"
+              />
+            </td>
+
+            <td>
+            <Text textClass="fs-12 text-end col-4" textValue="Suma: 120 zł" />
+            </td>
+          </tr>
         </tbody>
       </table>
     </div>
