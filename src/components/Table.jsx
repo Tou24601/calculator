@@ -3,7 +3,7 @@ import Row from "./Row";
 import Button from "./Button";
 import Text from "./Text";
 
-const Table = ({ sendChosenYear }) => {
+const Table = ({ sendChosenYear, sendItem, pricesSum, itemsList }) => {
   const [offer, setOffer] = useState([]);
   const [offerArr, setOfferArr] = useState([]);
   const [years, setYears] = useState([]);
@@ -58,6 +58,10 @@ const Table = ({ sendChosenYear }) => {
 
   const handleChosenArray = (value) => {
     setChosenData(value);
+    const servicesNames = value.map((item) => {
+      return item.name;
+    });
+    setServices(servicesNames);
   };
 
   useEffect(() => {
@@ -86,7 +90,6 @@ const Table = ({ sendChosenYear }) => {
       return item.name;
     });
     setSum(priceSum);
-    console.log(servicesList);
 
     //let newPricesList = [...pricesList, priceValue];
     //setPricesList(newPricesList)
@@ -103,6 +106,7 @@ const Table = ({ sendChosenYear }) => {
     let newCounter = counter + 1;
     setCounter(newCounter);
   };
+
   return (
     <div>
       <table className="table table-borderless">
@@ -124,6 +128,7 @@ const Table = ({ sendChosenYear }) => {
             years={years}
             handleChosenYear={handleChosenYear}
             sendObject={getObject}
+            sendItem={sendItem}
           />
           {rows.map((item) => {
             return (
@@ -136,8 +141,27 @@ const Table = ({ sendChosenYear }) => {
                 years={years}
                 handleChosenYear={handleChosenYear}
                 sendObject={getObject}
+                sendItem={sendItem}
               />
             );
+          })}
+          {itemsList.map((el) => {
+            for (let i = 0; i < itemsList.length; i++) {
+              if (el.name === "internet" && itemsList[i].name === "telewizja") {
+                console.log(el.name, itemsList[i].name)
+                return (
+                  <tr>
+                    <td></td>
+                    <td>
+                      <Text textClass="fs-5 col-12" textValue="Dekoder 4K" />
+                    </td>
+                    <td>
+                      <Text textClass="fs-5 col-12" textValue="cena" />
+                    </td>
+                  </tr>
+                );
+              }
+            }
           })}
           <tr>
             <td></td>
@@ -151,9 +175,13 @@ const Table = ({ sendChosenYear }) => {
             </td>
 
             <td>
-            <Text textClass="fs-12 text-end col-4" textValue="Suma: 120 zł" />
+              <Text
+                textClass="fs-5 col-12"
+                textValue={`Razem: ${pricesSum} zł`}
+              />
             </td>
           </tr>
+
         </tbody>
       </table>
     </div>

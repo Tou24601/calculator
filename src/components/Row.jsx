@@ -6,7 +6,7 @@ import Text from "./Text";
 
 const ChosenAaaData = createContext();
 
-const Row = ({ years, sendChosenValue , yearSelectClass, handleChosenArray, handleChosenYear, options, chosenData, sendObject }) => {
+const Row = ({ years, sendChosenValue , yearSelectClass, handleChosenArray, handleChosenYear, options, chosenData, sendObject, sendItem }) => {
 
 
   //const [offer, setOffer] = useState([]);
@@ -49,12 +49,20 @@ const Row = ({ years, sendChosenValue , yearSelectClass, handleChosenArray, hand
   const handleChosenService = (value) => {
     for (let i = 0; i < chosenData.length; i++) {
       if (chosenData[i].name === value) {
-        console.log(chosenData[i].id)
         setPriceValue(chosenData[i].price);
         sendObject(chosenData[i])
+
+        const newItem = {
+          name: chosenData[i].name,
+          price: chosenData[i].price,
+          id: Date.now()
+        }
+        sendItem(newItem)
       }
     }
   };
+
+ // useEffect(() => {}, [])
 
   return (
     <>
@@ -77,7 +85,7 @@ const Row = ({ years, sendChosenValue , yearSelectClass, handleChosenArray, hand
             />
           </td>
           <td>
-            <Text textValue={`${priceValue} zł`} textClass="fs-5 text-end col-4" sendObject={sendObject} />
+            <Text textValue={`${priceValue} zł`} textClass="fs-5" sendObject={sendObject} />
           </td>
         </tr>
       </ChosenAaaData.Provider>
