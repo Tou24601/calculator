@@ -3,7 +3,13 @@ import Row from "./Row";
 import Button from "./Button";
 import Text from "./Text";
 
-const Table = ({ sendChosenYear, sendItem, pricesSum, itemsList }) => {
+const Table = ({
+  sendChosenYear,
+  sendItem,
+  pricesSum,
+  itemsList,
+  isDekoderFree,
+}) => {
   const [offer, setOffer] = useState([]);
   const [offerArr, setOfferArr] = useState([]);
   const [years, setYears] = useState([]);
@@ -145,24 +151,15 @@ const Table = ({ sendChosenYear, sendItem, pricesSum, itemsList }) => {
               />
             );
           })}
-          {itemsList.map((el) => {
-            for (let i = 0; i < itemsList.length; i++) {
-              if (el.name === "internet" && itemsList[i].name === "telewizja") {
-                console.log(el.name, itemsList[i].name)
-                return (
-                  <tr>
-                    <td></td>
-                    <td>
-                      <Text textClass="fs-5 col-12" textValue="Dekoder 4K" />
-                    </td>
-                    <td>
-                      <Text textClass="fs-5 col-12" textValue="cena" />
-                    </td>
-                  </tr>
-                );
-              }
-            }
-          })}
+          <tr className={isDekoderFree ? "" : "nonvisible"}>
+            <td></td>
+            <td>
+              <Text textClass="fs-6 col-12" textValue="+ Dekoder 4K" />
+            </td>
+            <td>
+              <Text textClass="fs-5" textValue="0 zł" />
+            </td>
+          </tr>
           <tr>
             <td></td>
             <td>
@@ -173,15 +170,17 @@ const Table = ({ sendChosenYear, sendItem, pricesSum, itemsList }) => {
                 buttonClass="btn btn-primary col-1.5 position-absolute"
               />
             </td>
-
-            <td>
+            <td className="d-flex flex-row">
+            <Text
+                textClass="fs-5 col-12"
+                textValue="Razem: "
+              />
               <Text
                 textClass="fs-5 col-12"
-                textValue={`Razem: ${pricesSum} zł`}
+                textValue={`${pricesSum} zł`}
               />
             </td>
           </tr>
-
         </tbody>
       </table>
     </div>

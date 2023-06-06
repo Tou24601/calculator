@@ -9,6 +9,7 @@ const Main = () => {
   const [pricesSum, setPricesSum] = useState(0);
   const [suggestedService, setSuggestedService] = useState("");
   const [suggestedPrice, setSuggestedPrice] = useState("");
+  const [isDekoderFree, setIsDekoderFree] = useState(false);
 
   const handleYearChange = (value) => {
     let chosenYear = value;
@@ -35,19 +36,21 @@ const Main = () => {
     }, 0);
     setPricesSum(reducedPrices)
    console.log(itemsList)
-     /*const checkedList = itemsList.map((el) => {
+   console.log(isDekoderFree)
+     const checkedList = itemsList.map((el) => {
       for (let i = 0; i < itemsList.length; i++) {
-        if (el.name === "internet" && itemsList[i].name === "telewizja") {
-
+        if (el.name === "Internet" && itemsList[i].name === "Telewizja") {
+          setIsDekoderFree(true)
+          
         }
       }
-     })*/
+     })
   }, [itemsList]);
 
 
   return (
     <div className="container">
-      <Table sendChosenYear={handleYearChange} sendItem={getItem} pricesSum={pricesSum} itemsList={itemsList} />
+      <Table sendChosenYear={handleYearChange} sendItem={getItem} pricesSum={pricesSum} itemsList={itemsList} isDekoderFree={isDekoderFree} />
       <Suggestion suggestedService={suggestedService} suggestedPrice={suggestedPrice} />
     </div>
   );
