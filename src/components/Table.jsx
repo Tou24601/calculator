@@ -97,14 +97,9 @@ const Table = ({
     });
     setSum(priceSum);
 
-    //let newPricesList = [...pricesList, priceValue];
-    //setPricesList(newPricesList)
+
   };
 
-  /*const getPrice = (value) => {
-    setPriceValue(value)
-   // console.log(value)
-   }*/
 
   const handleAddClick = () => {
     let newRows = [...rows, counter];
