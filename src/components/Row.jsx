@@ -44,7 +44,7 @@ const Row = ({ years, sendChosenValue , yearSelectClass, handleChosenArray, hand
     }
   };*/
 
-  
+  //switch chosenData to localStorage!
 
   const handleChosenService = (value) => {
     for (let i = 0; i < chosenData.length; i++) {
