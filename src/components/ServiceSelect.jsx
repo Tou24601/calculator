@@ -2,8 +2,6 @@ import Select from "../components/Select";
 import {ChosenAaaData} from "../components/Row";
 
 const ServiceSelect = ({sendChosenValue, options}) => {
-
-    console.log(ChosenAaaData)
   return (
     <>
       <Select
